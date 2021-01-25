@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Inicio</h1>
+        <br/>
+        <!-- Que sucede si la lista esta de tipo persona esta vacia se recomienda mostrar al usuario que ese objeto se encuentra vacio -->
+        <!-- Solo se itera la lista y se muestra si es diferente de null y vacio -->
+        <div th:if="${personas != null and !personas.empty}">
+
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Telefono:</th>
+                </tr>
+                <!-- Para iterar cada uno de los elementos en la vista se usa el prefijo th y la función each -->
+                <!-- Se crea variable temporal persona la cual va ir apuntando a cada uno de los objetos de tipo persona, posterormente se accede a la variable usando el mismo nombre -->
+                <tr th:each="persona : ${personas}">
+                    <td th:text="${persona.nombre}">Mostrar Nombre</td>
+                    <td th:text="${persona.apellido}">Mostrar Apellido</td>
+                    <td th:text="${persona.email}">Mostrar Correo</td>
+                    <td th:text="${persona.telefono}">Mostrar Telefono</td>
+                </tr>
+            </table>
+         </div> 
+        <!-- Se agrega un mensaje cuando la lista esta vacia se realiza la comparación inversa -->
+        <!-- Si persona es igual a nullo o vacio -->
+        <div th:if="${personas == null or personas.empty}">
+            La lista de personas esta vacia
+        </div>
+    </body>
+</html>
