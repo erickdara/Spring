@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos de la Persona</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Datos de la Persona</h1>
+        <a th:href="@{/}">Regresar</a>
+        <br/>
+        <!-- Se agrega un formulario, se agrega un action y se agrega el path de guardar para guardar esta info en la  -->
+        <!-- base de datos, el tipo de metodo tipo POST, Recordar que desde el controlador se compartio un objeto de tipo persona -->
+        <!-- Así que este formulario se va a asociar a un objeto de tipo Persona -->
+        <!-- Para poderlo asociar desde el formulario Thymeleaf usa la siguiente sintaxis: th:object="${persona}" se especifica la varable compartida(Objeto Persona)-->
+        <!-- Con esto es suficiente para que este formulario se asocie a este objeto de tipo persona -->
+        <form th:action="@{/guardar}" method="post" th:object="${persona}">
+            <!-- Se debe especificar el valor de idPersona si es que existe con un campo oculto con el atributo idPersoa -->
+            <!-- Cuando se esta agregando el valor de idPersona esta nulo -->
+            <!-- Pero si ya hay un objeto en memoria cuando se ejecute el metodo Editar que recupera el objeto de base de datos -->
+            <!-- Entonces en la vista se desplegara un valor de idPersona -->
+            <input type="hidden" name="idPersona" th:field="*{idPersona}"/>
+             <br/>
+            <label for ="nombre">Nombre:</label>
+            <!-- Se asocia el campo de objeto persona con ste campo de tipo input  -->
+            <!-- Para asociarlo thymeleaf utiliza la siguiente sintaxis: th:field="*{nombre}" (*{Se indica e atributo de este objeto tipo persona a acceder]) -->
+            <input type="text" name="nombre" th:field="*{nombre}"/>  
+            <br/>
+            <label for ="apellido">Apellido:</label>
+            <input type="text" name="apellido" th:field="*{apellido}"/>  
+            <br/>
+            <label for ="email">Email:</label>
+            <input type="email" name="email" th:field="*{email}"/>  
+            <br/>
+            <label for ="telefono">Telefono:</label>
+            <input type="tel" name="telefono" th:field="*{telefono}"/>  
+             <br/>
+             <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+    </body>
+</html>
